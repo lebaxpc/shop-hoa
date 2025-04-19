@@ -6,25 +6,27 @@ const products = [
   
   // Hàm gửi qua Telegram (vào topic Shop Hoa)
   function sendToTelegram(name, phone, address, orderDetails, total) {
-    const message = `Đơn hàng mới:\nKhách: ${name}\nSĐT: ${phone}\nĐịa chỉ: ${address}\nSản phẩm:\n${orderDetails}\nTổng: ${total} VNĐ`;
-    const encodedMessage = encodeURIComponent(message);
-    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&message_thread_id=${TELEGRAM_MESSAGE_THREAD_ID}&text=${encodedMessage}`)
-      .then(response => response.json())
+    fetch("/.netlify/functions/sendOrder", {
+      method: "POST",
+      body: JSON.stringify({ name, phone, address, orderDetails, total })
+    })
+      .then(res => res.json())
       .then(data => {
-        if (data.ok) {
+        if (data.success) {
           alert("Đơn hàng đã được gửi vào topic Shop Hoa! Cảm ơn bạn.");
           localStorage.removeItem("cart");
           document.getElementById("order-form").style.display = "none";
           document.getElementById("orderForm").reset();
           displayCart();
         } else {
-          alert("Lỗi khi gửi đơn hàng vào topic Shop Hoa: " + data.description);
+          alert("Lỗi khi gửi đơn hàng: " + data.message);
         }
       })
       .catch(error => {
         alert("Lỗi khi gửi đơn hàng: " + error);
       });
   }
+  
   
   // Xem chi tiết sản phẩm
   function viewProduct(id) {
