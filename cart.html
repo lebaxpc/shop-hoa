@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - Shop Hoa Tươi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Shop Hoa Tươi</h1>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="cart.html">Giỏ hàng</a>
+        </nav>
+    </header>
+
+    <!-- Giỏ hàng -->
+    <section class="cart">
+        <h2>Giỏ hàng của bạn</h2>
+        <div id="cart-items"></div>
+        <p>Tổng tiền: <span id="cart-total">0 VNĐ</span></p>
+        <button onclick="showOrderForm()">Đặt hàng</button>
+    </section>
+
+    <!-- Form đặt hàng -->
+    <section id="order-form" style="display: none;">
+        <h2>Thông tin đặt hàng</h2>
+        <form id="orderForm">
+            <label>Họ tên:</label>
+            <input type="text" id="name" required>
+            <label>Số điện thoại:</label>
+            <input type="tel" id="phone" required>
+            <label>Địa chỉ giao hàng:</label>
+            <input type="text" id="address" required>
+            <button type="submit">Gửi đơn hàng</button>
+        </form>
+    </section>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
